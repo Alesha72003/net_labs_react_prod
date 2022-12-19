@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import List from './List';
+import ListPage from './pages/list/list';
 
 const tasks = {
   1: {
@@ -26,6 +26,6 @@ const tasks = {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <List tasks={Object.keys(tasks).map(a => ({"id": a, ...tasks[a]}))}/>
+    <ListPage tasks={Object.keys(tasks).map(a => ({"id": a, ...tasks[a]}))}/>
   </React.StrictMode>
 );
