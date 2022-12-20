@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 import ListPage from './pages/list/list';
 
 const tasks = {
@@ -26,6 +28,8 @@ const tasks = {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ListPage tasks={Object.keys(tasks).map(a => ({"id": a, ...tasks[a]}))}/>
+    <Provider store={store}>
+      <ListPage tasks={Object.keys(tasks).map(a => ({"id": a, ...tasks[a]}))}/>
+    </Provider>
   </React.StrictMode>
 );

@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import counterReducer from '../features/counter/counterSlice';
+import listReducer from '../features/list/listSlice';
 
 export const store = configureStore({
   reducer: {
     // counter: counterReducer,
-    filter: filterReducer,
-    // list: listReducer
+    list: listReducer
   },
 });

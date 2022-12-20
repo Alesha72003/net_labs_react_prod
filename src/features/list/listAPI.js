@@ -35,6 +35,6 @@ const tasks = {
 
 export function fetchData(where = {}) {
   return new Promise((resolve) => {
-    setTimeout(() => resolve({data: tasks}));
+    setTimeout(() => resolve({data: tasks}), 500);
   });
 }

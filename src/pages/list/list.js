@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import "./list.css";
 import {Container, Breadcrumb, Navbar} from "react-bootstrap";
-import Filter from "../../features/filter/Filter";
+import Filter from "../../features/list/Filter";
 import List from "../../features/list/List";
 
 export default function ListPage({tasks}) {

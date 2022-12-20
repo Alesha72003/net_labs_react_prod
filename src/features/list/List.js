@@ -1,8 +1,12 @@
 import {Card, Col, Row, Button} from "react-bootstrap";
+import { useSelector, useDispatch } from 'react-redux';
 import "./List.css";
+import {getData, selectValue, selectStatus} from "./listSlice";
 
 
-export default function List({tasks}) {
+export default function List() {
+  const tasks = useSelector(selectValue);
+
   return (
     <Row>
     {tasks.map(item => {
