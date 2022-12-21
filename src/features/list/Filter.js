@@ -2,6 +2,7 @@ import {Form, Button} from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
 import "./Filter.css";
 import { selectLoading, getData } from "./listSlice";
+import { useState } from "react";
 
 const configAutogenGroups = [{
   name: "title",
@@ -27,7 +28,7 @@ const configAutogenCheckbox = [{
   label: "COMPLETED"
 }];
 
-function generateItems(config) {
+function GenerateItems(config) {
   return (
     <Form.Group controlId={config.name}>
       <Form.Label>{config.label}</Form.Label>
@@ -36,67 +37,47 @@ function generateItems(config) {
   );
 }
 
-function generateCheckbox(config) {
+function GenerateCheckbox(config) {
+  const [checked, setChecked] = useState(true);
   return (
     <Form.Check
       inline
       label={config.label}
       name={config.name}
       type="checkbox"
-      inline
+      checked={checked}
+      onChange={() => setChecked(!checked)}
     />
   );
 }
 
-function onSubmitHandle(e) {
-  console.log(e)
-  e.preventDefault();
-  console.log(Object.keys(e.target).reduce((a, el) => ({...a, [e.target[el].name]: e.target[el].value}), {}));
-}
-
-const items = {
-  ...configAutogenGroups.reduce((a, v) => ({...a, [v.name]: generateItems(v)}), {}),
-  ...configAutogenCheckbox.reduce((a, v) => ({...a, [v.name]: generateCheckbox(v)}), {})
-}
-
-console.log(items)
 
 export default function Filter() {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
 
+  let items = {
+    ...configAutogenGroups.reduce((a, v) => ({...a, [v.name]: GenerateItems(v)}), {}),
+    ...configAutogenCheckbox.reduce((a, v) => ({...a, [v.name]: GenerateCheckbox(v)}), {})
+  }
 
+  function onSubmitHandle(e) {
+    e.preventDefault();
+    const formData = Object.keys(items).reduce((a, v) => ({...a, [v]: e.target[v].type === "checkbox" ? e.target[v].checked : e.target[v].value}), {});
+    dispatch(getData(formData));
+  }
 
   return (
-    <Form className="filter" onSubmit={onSubmitHandle}>
+    <Form className="filter" onSubmit={(e) => !loading ? onSubmitHandle(e) : null}>
       {items.title}
       {items.group}
       <div>
-        <Form.Check
-          inline
-          label="NEW"
-          name="new"
-          type="checkbox"
-          checked
-        />
-        <Form.Check
-          inline
-          label="IN WORK"
-          name="in_work"
-          type="checkbox"
-          checked
-        />
-        <Form.Check
-          inline
-          label="COMPLETED"
-          name="completed"
-          type="checkbox"
-          checked
-        />
+        {items.new}
+        {items.in_work}
+        {items.completed}
       </div>
       <Button
         variant="secondary"
-        onClick={() => !loading ? dispatch(getData({})) : null}
         disabled={loading}
         type="submit"
       >

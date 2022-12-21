@@ -26,7 +26,7 @@ export default function ListPage({tasks}) {
       </Navbar>
       <Container>
         <Filter />
-        <List tasks={tasks}/>
+        <List />
       </Container>
     </>
   );
