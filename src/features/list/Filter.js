@@ -2,19 +2,13 @@ import {Form, Button} from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
 import "./Filter.css";
 import { selectLoading, getData } from "./listSlice";
-import { useState } from "react";
+import { selectLoading as selectLoadingFilter, selectValue as selectValueFilter, getGroup } from "./filterSlice";
+import { useState, useEffect } from "react";
 
 const configAutogenGroups = [{
   name: "title",
   label: "Search query",
-  item: <Form.Control placeholder="Type your query" />
-}, {
-  name: "group",
-  label: "Select Group",
-  item: <Form.Select aria-label="Select group">
-          <option>All groups</option>
-          <option value="1">test</option>
-        </Form.Select>
+  item: () => <Form.Control placeholder="Type your query" />
 }];
 
 const configAutogenCheckbox = [{
@@ -32,7 +26,7 @@ function GenerateItems(config) {
   return (
     <Form.Group controlId={config.name}>
       <Form.Label>{config.label}</Form.Label>
-      {config.item}
+      {config.item()}
     </Form.Group>
   );
 }
@@ -55,9 +49,32 @@ function GenerateCheckbox(config) {
 export default function Filter() {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
+  const loadingGroups = useSelector(selectLoadingFilter);
+  const valueGroups = useSelector(selectValueFilter);
+
+  useEffect(() => {dispatch(getGroup())}, [dispatch]) //Load groups on startup
 
   let items = {
     ...configAutogenGroups.reduce((a, v) => ({...a, [v.name]: GenerateItems(v)}), {}),
+    group: GenerateItems({
+        name: "group",
+        label: "Select Group",
+        item: () => {
+          return (
+            <Form.Select
+              aria-label="Select group"
+              disabled={loadingGroups}
+              value={loadingGroups ? "Loading..." : null}
+            >
+              <option value="">All groups</option>
+              {loadingGroups ? <option disabled>Loading...</option> : null}
+              {valueGroups.map(el =>
+                <option value={el.id}>{el.name}</option>
+              )}
+            </Form.Select>
+          );
+        }
+    }),
     ...configAutogenCheckbox.reduce((a, v) => ({...a, [v.name]: GenerateCheckbox(v)}), {})
   }
 
