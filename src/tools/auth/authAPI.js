@@ -5,7 +5,7 @@ export function login(login, password) {
   return new Promise((resolve, reject) => {
     xhr.onload = function () {
       if (xhr.status != 200) {
-        return reject({status: xhr.status});
+        return reject("Login or password incorrect");
       }
       return resolve({data: xhr.response});
     }
