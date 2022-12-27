@@ -30,18 +30,20 @@ export const authSlice = createSlice({
     builder
       .addCase(doLogin.pending, state => {
         state.loading = true;
-      })
-      .addCase(doLogin.fulfilled, (state, payload) => {
-        state.loading = false;
-        state.me = payload;
         state.error = null;
       })
-      .addCase(doLogin.rejected, (state, payload) => {
+      .addCase(doLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = payload;
+        state.me = action.payload;
+        state.error = null;
+      })
+      .addCase(doLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       })
       .addCase(doLogout.pending, state => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(doLogout.fulfilled, state => {
         state.loading = false;
@@ -52,6 +54,7 @@ export const authSlice = createSlice({
 
 export const selectAuthLoading = (state) => state.auth.loading;
 export const selectMe = (state) => state.auth.me;
-export const selectError = (state) => state.error;
-export const { setFrom } = authSlice.reducers;
+export const selectError = (state) => state.auth.error;
+export const selectFrom = (state) => state.auth.from;
+export const { setFrom } = authSlice.actions;
 export default authSlice.reducer;
