@@ -1,7 +1,7 @@
 import {Card, Col, Row, Button} from "react-bootstrap";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import "./List.css";
-import {getData, selectValue, selectStatus} from "./listSlice";
+import {selectValue} from "./listSlice";
 
 
 export default function List() {
@@ -10,7 +10,7 @@ export default function List() {
   return (
     <Row>
     {tasks.map(item => {
-    return <Col>
+    return <Col key={item.id}>
         <Card>
           {item.image ? <Card.Img variant="top" src={`/img/${item.image}`} /> : null}
           <Card.Body>

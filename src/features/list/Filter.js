@@ -64,12 +64,12 @@ export default function Filter() {
             <Form.Select
               aria-label="Select group"
               disabled={loadingGroups}
-              value={loadingGroups ? "Loading..." : null}
+              value={loadingGroups ? "Loading..." : undefined}
             >
-              <option value="">All groups</option>
-              {loadingGroups ? <option disabled>Loading...</option> : null}
+              <option key="all" value="">All groups</option>
+              {loadingGroups ? <option key="loading" disabled>Loading...</option> : null}
               {valueGroups.map(el =>
-                <option value={el.id}>{el.name}</option>
+                <option key={el.id} value={el.id}>{el.name}</option>
               )}
             </Form.Select>
           );

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { login, logout } from "./authAPI";
+import { login, logout, whoami } from "./authAPI";
 
 const initialState = {
   me: null,
@@ -16,6 +16,11 @@ export const doLogin = createAsyncThunk(
 export const doLogout = createAsyncThunk(
   'auth/logout',
   logout
+);
+
+export const doWhoami = createAsyncThunk(
+  'auth/whoami',
+  whoami
 );
 
 export const authSlice = createSlice({
@@ -46,6 +51,17 @@ export const authSlice = createSlice({
         state.error = null;
       })
       .addCase(doLogout.fulfilled, state => {
+        state.loading = false;
+        state.me = null;
+      })
+      .addCase(doWhoami.pending, state => {
+        state.loading = true;
+      })
+      .addCase(doWhoami.fulfilled, (state, action) => {
+        state.loading = false;
+        state.me = action.payload;
+      })
+      .addCase(doWhoami.rejected, state => {
         state.loading = false;
         state.me = null;
       })

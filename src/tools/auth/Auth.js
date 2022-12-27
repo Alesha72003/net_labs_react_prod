@@ -1,16 +1,20 @@
 import { Dropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate, useLocation } from "react-router-dom";
-import { selectMe, setFrom } from "./authSlice";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { selectMe, setFrom, selectAuthLoading, doLogout } from "./authSlice";
 import userIcon from "./user.svg"
 
 export function RequireAuth({ children }) {
   const me = useSelector(selectMe);
-  const dispatch = useDispatch();
+  const loading = useSelector(selectAuthLoading);
   const location = useLocation();
 
+  if (loading) {
+    return "Loading..."
+  }
+
   if (!me) {
-    dispatch(setFrom(location.pathname));
+    setFrom(location.pathname);
     return <Navigate to="/auth" replace />
   }
 
@@ -19,7 +23,9 @@ export function RequireAuth({ children }) {
 
 export function AuthHeader() {
   const me = useSelector(selectMe);
-  //const dispatch = useDispatch();
+  const loading = useSelector(selectAuthLoading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <Dropdown>
@@ -31,12 +37,29 @@ export function AuthHeader() {
           height="30"
           className="d-inline-block align-top"
         />{' '}
-        {me ? me.username : "Not loggined"}
+        {loading ? "Loading..." :
+        me ? me.username : "Not loggined"}
       </Dropdown.Toggle>
       {me ? <Dropdown.Menu>
-        {me.admin ? <Dropdown.Item eventKey="1">Go to Admin panel</Dropdown.Item> : null}
+        {me.admin ?
+          <Dropdown.Item
+            eventKey="1"
+            href="/admin"
+          >
+            Go to Admin panel
+          </Dropdown.Item>
+        : null}
         <Dropdown.Divider />
-        <Dropdown.Item eventKey="2">Logout</Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            dispatch(doLogout()).then(() => {
+              navigate("/auth");
+            });
+
+          }}
+        >
+          Logout
+        </Dropdown.Item>
       </Dropdown.Menu> : null}
     </Dropdown>
   );
