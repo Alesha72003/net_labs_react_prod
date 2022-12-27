@@ -7,6 +7,7 @@ import { ListBody, ListHeader} from './pages/list/list';
 import { AuthPageBody, AuthPageHeader } from './pages/auth/auth';
 import { Navbar, Container } from 'react-bootstrap';
 import { AuthHeader, RequireAuth } from "./tools/auth/Auth";
+import { doWhoami } from "./tools/auth/authSlice";
 import logo from './logo.svg';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -45,24 +46,31 @@ function Template({header, body}) {
   );
 }
 
+function App() {
 
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Template header={ListHeader} body={ListBody} />
+            </RequireAuth>
+          }
+        />
+        <Route path="/auth" element={<Template header={AuthPageHeader} body={AuthPageBody} />} />
+      </Routes>
+    </Router>
+  );
+}
+
+store.dispatch(doWhoami())
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route 
-            path="/" 
-            element={
-              <RequireAuth>
-                <Template header={ListHeader} body={ListBody} />
-              </RequireAuth>
-            } 
-          />
-          <Route path="/auth" element={<Template header={AuthPageHeader} body={AuthPageBody} />} />
-        </Routes>
-      </Router>
+      <App />
     </Provider>
   </React.StrictMode>
 );
