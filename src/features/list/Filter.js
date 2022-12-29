@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 const configAutogenGroups = [{
   name: "title",
   label: "Search query",
-  item: () => <Form.Control placeholder="Type your query" />
+  item: <Form.Control placeholder="Type your query" />
 }];
 
 const configAutogenCheckbox = [{
@@ -26,7 +26,7 @@ function GenerateItems(config) {
   return (
     <Form.Group controlId={config.name}>
       <Form.Label>{config.label}</Form.Label>
-      {config.item()}
+      {config.item}
     </Form.Group>
   );
 }
@@ -59,8 +59,7 @@ export default function Filter() {
     group: GenerateItems({
         name: "group",
         label: "Select Group",
-        item: () => {
-          return (
+        item: 
             <Form.Select
               aria-label="Select group"
               disabled={loadingGroups}
@@ -72,8 +71,6 @@ export default function Filter() {
                 <option key={el.id} value={el.id}>{el.name}</option>
               )}
             </Form.Select>
-          );
-        }
     }),
     ...configAutogenCheckbox.reduce((a, v) => ({...a, [v.name]: GenerateCheckbox(v)}), {})
   }
