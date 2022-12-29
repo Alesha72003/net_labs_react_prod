@@ -1,49 +1,10 @@
 import {Form, Button} from "react-bootstrap";
+import { CustomForm, Group, Checkbox } from "../../tools/form_generator/form_generator";
 import { useSelector, useDispatch } from 'react-redux';
 import "./Filter.css";
 import { selectLoading, getData } from "./listSlice";
 import { selectLoading as selectLoadingFilter, selectValue as selectValueFilter, getGroup } from "./filterSlice";
-import { useState, useEffect } from "react";
-
-const configAutogenGroups = [{
-  name: "title",
-  label: "Search query",
-  item: <Form.Control placeholder="Type your query" />
-}];
-
-const configAutogenCheckbox = [{
-  name: "new",
-  label: "NEW"
-}, {
-  name: "in_work",
-  label: "IN WORK"
-}, {
-  name: "completed",
-  label: "COMPLETED"
-}];
-
-function GenerateItems(config) {
-  return (
-    <Form.Group controlId={config.name}>
-      <Form.Label>{config.label}</Form.Label>
-      {config.item}
-    </Form.Group>
-  );
-}
-
-function GenerateCheckbox(config) {
-  const [checked, setChecked] = useState(true);
-  return (
-    <Form.Check
-      inline
-      label={config.label}
-      name={config.name}
-      type="checkbox"
-      checked={checked}
-      onChange={() => setChecked(!checked)}
-    />
-  );
-}
+import { useEffect } from "react";
 
 
 export default function Filter() {
@@ -54,41 +15,35 @@ export default function Filter() {
 
   useEffect(() => {dispatch(getGroup())}, [dispatch]) //Load groups on startup
 
-  let items = {
-    ...configAutogenGroups.reduce((a, v) => ({...a, [v.name]: GenerateItems(v)}), {}),
-    group: GenerateItems({
-        name: "group",
-        label: "Select Group",
-        item: 
-            <Form.Select
-              aria-label="Select group"
-              disabled={loadingGroups}
-              value={loadingGroups ? "Loading..." : undefined}
-            >
-              <option key="all" value="">All groups</option>
-              {loadingGroups ? <option key="loading" disabled>Loading...</option> : null}
-              {valueGroups.map(el =>
-                <option key={el.id} value={el.id}>{el.name}</option>
-              )}
-            </Form.Select>
-    }),
-    ...configAutogenCheckbox.reduce((a, v) => ({...a, [v.name]: GenerateCheckbox(v)}), {})
-  }
-
-  function onSubmitHandle(e) {
-    e.preventDefault();
-    const formData = Object.keys(items).reduce((a, v) => ({...a, [v]: e.target[v].type === "checkbox" ? e.target[v].checked : e.target[v].value}), {});
-    dispatch(getData(formData));
-  }
 
   return (
-    <Form className="filter" onSubmit={(e) => !loading ? onSubmitHandle(e) : null}>
-      {items.title}
-      {items.group}
+    <CustomForm className="filter" onSubmitData={(formData) => !loading ? dispatch(getData(formData)) : null}>
+      <Group
+        name="title"
+        label="Search query"
+        item={<Form.Control placeholder="Type your query" />}
+      />
+      <Group
+        name="group"
+        label="Select Group"
+        item={
+          <Form.Select
+            aria-label="Select group"
+            disabled={loadingGroups}
+            value={loadingGroups ? "Loading..." : undefined}
+          >
+            <option key="all" value="">All groups</option>
+            {loadingGroups ? <option key="loading" disabled>Loading...</option> : null}
+            {valueGroups.map(el =>
+              <option key={el.id} value={el.id}>{el.name}</option>
+            )}
+          </Form.Select>
+        }
+      />
       <div>
-        {items.new}
-        {items.in_work}
-        {items.completed}
+        <Checkbox name="new" label="NEW" />
+        <Checkbox name="in_work" label="IN WORK" />
+        <Checkbox name="completed" label="COMPLETED" />
       </div>
       <Button
         variant="secondary"
@@ -97,6 +52,6 @@ export default function Filter() {
       >
       {!loading ? "Filter" : "Loading..."}
       </Button>
-    </Form>
+    </CustomForm>
   );
 }
