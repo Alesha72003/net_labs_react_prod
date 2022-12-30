@@ -13,7 +13,7 @@ export default function Filter() {
   const loadingGroups = useSelector(selectLoadingFilter);
   const valueGroups = useSelector(selectValueFilter);
 
-  useEffect(() => {dispatch(getGroup())}, [dispatch]) //Load groups on startup
+  useEffect(() => {dispatch(getGroup())}, [dispatch]) //Load groups on startup nado podumat`
 
 
   return (
@@ -30,7 +30,7 @@ export default function Filter() {
           <Form.Select
             aria-label="Select group"
             disabled={loadingGroups}
-            value={loadingGroups ? "Loading..." : undefined}
+            value={loadingGroups ? "Loading..." : null}
           >
             <option key="all" value="">All groups</option>
             {loadingGroups ? <option key="loading" disabled>Loading...</option> : null}

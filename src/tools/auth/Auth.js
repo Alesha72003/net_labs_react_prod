@@ -38,7 +38,7 @@ export function AuthHeader() {
           className="d-inline-block align-top"
         />{' '}
         {loading ? "Loading..." :
-        me ? me.username : "Not loggined"}
+        me ? me.username : "Not logined"}
       </Dropdown.Toggle>
       {me ? <Dropdown.Menu>
         {me.admin ?
