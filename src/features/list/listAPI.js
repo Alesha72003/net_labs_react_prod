@@ -31,6 +31,11 @@ const tasks = {
     status: "test",
     image: "3.jpg"
   },
+  4: {
+    description: "noimage",
+    taskname: "noimage",
+    status: "test"
+  }
 };
 
 export function fetchData(where = {}) {
