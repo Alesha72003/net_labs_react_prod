@@ -6,8 +6,9 @@ import { store } from './app/store';
 import { ListBody, ListHeader} from './pages/list/list';
 import { AuthPageBody, AuthPageHeader } from './pages/auth/auth';
 import { Navbar, Container } from 'react-bootstrap';
-import { AuthHeader, RequireAuth } from "./tools/auth/Auth";
-import { doWhoami } from "./tools/auth/authSlice";
+import { AuthHeader, RequireAuth } from "./features/auth/Auth";
+import { doWhoami } from "./features/auth/authSlice";
+import { ItemHeader, ItemBody } from "./pages/item/Item";
 import logo from './logo.svg';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -56,6 +57,14 @@ function App() {
           element={
             <RequireAuth>
               <Template header={ListHeader} body={ListBody} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/item/:id"
+          element={
+            <RequireAuth>
+              <Template header={ItemHeader} body={ItemBody} />
             </RequireAuth>
           }
         />
