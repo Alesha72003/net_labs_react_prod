@@ -18,15 +18,10 @@ export default function Filter() {
 
   return (
     <CustomForm className="filter" onSubmitData={(formData) => !loading ? dispatch(getData(formData)) : null}>
-      <Group
-        name="title"
-        label="Search query"
-        item={<Form.Control placeholder="Type your query" />}
-      />
-      <Group
-        name="group"
-        label="Select Group"
-        item={
+      <Group name="title" label="Search query">
+        <Form.Control placeholder="Type your query" />
+      </Group>
+      <Group name="group" label="Select Group">
           <Form.Select
             aria-label="Select group"
             disabled={loadingGroups}
@@ -38,8 +33,7 @@ export default function Filter() {
               <option key={el.id} value={el.id}>{el.name}</option>
             )}
           </Form.Select>
-        }
-      />
+      </Group>
       <div>
         <Checkbox name="new" label="NEW" />
         <Checkbox name="in_work" label="IN WORK" />

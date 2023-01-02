@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { selectAuthLoading, selectError, doLogin, selectMe, selectFrom } from '../../tools/auth/authSlice';
+import { selectAuthLoading, selectError, doLogin, selectMe, selectFrom } from '../../features/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Alert } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';

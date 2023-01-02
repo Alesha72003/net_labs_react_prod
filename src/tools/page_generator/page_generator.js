@@ -1,5 +1,5 @@
 import { ListGroup } from "react-bootstrap";
-import "./editpage_generator.css";
+import "./page_generator.css";
 
 export function CentralWindow({ children }) {
   return (
@@ -9,12 +9,12 @@ export function CentralWindow({ children }) {
   );
 }
 
-export function EditList({ children }) {
+export function ListTemplate({ children }) {
   return (
     <ListGroup className="editlist">
-    {children.map(el => {
+    {children.map(el =>
       <ListGroup.Item>{el}</ListGroup.Item>
-    })}
+    )}
     </ListGroup>
   );
 }

@@ -5,7 +5,7 @@ export function Group(config) {
   return (
     <Form.Group controlId={config.name} name={config.name}>
       <Form.Label>{config.label}</Form.Label>
-      {config.item}
+      {config.children}
     </Form.Group>
   );
 }
