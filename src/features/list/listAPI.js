@@ -16,7 +16,7 @@ const tasks = {
   1: {
     description: "test",
     taskname: "test",
-    status: "test",
+    status: "IN_WORK",
     image: "1.jpg"
   },
   2: {

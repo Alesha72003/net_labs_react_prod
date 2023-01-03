@@ -12,7 +12,7 @@ export function CentralWindow({ children }) {
 export function ListTemplate({ children }) {
   return (
     <ListGroup className="editlist">
-    {children.map(el =>
+    {(Array.isArray(children) ? children : Array(children)).map(el =>
       <ListGroup.Item>{el}</ListGroup.Item>
     )}
     </ListGroup>

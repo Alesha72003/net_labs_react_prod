@@ -19,7 +19,17 @@ export const getData = createAsyncThunk(
 export const listSlice = createSlice({
   name: "list",
   initialState,
-  reducers: {},
+  reducers: {
+    updateItem: (state, action) => {
+      const item = action.payload;
+      state.value = state.value.map(el => {
+        if (el.id === item.id) {
+          return item;
+        }
+        return el;
+      });
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getData.pending, (state) => {
@@ -35,4 +45,5 @@ export const listSlice = createSlice({
 export const selectValue = (state) => state.list.value;
 export const selectStatus = (state) => state.list.status;
 export const selectLoading = (state) => state.list.status === "loading";
+
 export default listSlice.reducer;
