@@ -2,7 +2,7 @@ import { ListTemplate } from "../../tools/page_generator/page_generator";
 import { CustomForm, Group } from "../../tools/form_generator/form_generator";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, selectItemLoading, selectItemValue, setPreloaded } from "./itemSlice";
+import { getItem, updateItem, selectItemLoading, selectItemValue, setPreloaded } from "./itemSlice";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { selectValue } from "../list/listSlice";
@@ -25,7 +25,7 @@ export function Item() {
 
 
   return(!value ? "Loading..." :
-    <CustomForm onSubmitData={(data) => console.log(data)}>
+    <CustomForm onSubmitData={data => !loading ? dispatch(updateItem({...value, ...data})) : null}>
       <ListTemplate>
         <Group name="taskname" label="Taskname">
           <Form.Control defaultValue={value.taskname} />
