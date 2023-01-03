@@ -4,6 +4,7 @@ import listReducer from '../features/list/listSlice';
 import filterReducer from "../features/list/filterSlice";
 import authReducer from "../features/auth/authSlice";
 import userReducer from "../features/auth/userSlice";
+import itemReducer from "../features/item/itemSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,5 +12,6 @@ export const store = configureStore({
     filter: filterReducer,
     auth: authReducer,
     user: userReducer,
+    item: itemReducer
   },
 });

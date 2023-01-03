@@ -1,4 +1,5 @@
-import { CentralWindow, ListTemplate } from "../../tools/page_generator/page_generator";
+import { Item } from "../../features/item/Item";
+import { CentralWindow } from "../../tools/page_generator/page_generator";
 
 export function ItemHeader() {
   return null;
@@ -7,9 +8,7 @@ export function ItemHeader() {
 export function ItemBody() {
   return (
     <CentralWindow>
-      <ListTemplate>
-        <p>test</p>
-      </ListTemplate>
+      <Item />
     </CentralWindow>
   );
 }
