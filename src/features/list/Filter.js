@@ -25,7 +25,7 @@ export default function Filter() {
           <Form.Select
             aria-label="Select group"
             disabled={loadingGroups}
-            value={loadingGroups ? "Loading..." : null}
+            value={loadingGroups ? "Loading..." : undefined}
           >
             <option key="all" value="">All groups</option>
             {loadingGroups ? <option key="loading" disabled>Loading...</option> : null}

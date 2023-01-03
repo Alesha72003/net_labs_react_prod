@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,13 +12,18 @@ export function RequireAuth({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (!loading && !me) {
+      dispatch(setFrom(location.pathname));
+      navigate("/auth");
+    }
+  }, [location, dispatch, loading, me, navigate]);
+
   if (loading) {
-    return "Loading..."
+    return "Loading...";
   }
 
   if (!me) {
-    dispatch(setFrom(location.pathname));
-    navigate("/auth");
     return null;
   }
 

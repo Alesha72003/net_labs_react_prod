@@ -27,7 +27,7 @@ function TemplateHeader({header}) {
           />{' '}
           React Bootstrap
         </Navbar.Brand>
-        {header()}
+        {header}
         <AuthHeader />
       </Container>
     </Navbar>
@@ -41,7 +41,7 @@ function Template({header, body}) {
         <TemplateHeader header={header} />
       </div> 
       <div id="body">
-        {body()}
+        {body}
       </div>
     </>
   );
@@ -56,7 +56,7 @@ function App() {
           path="/"
           element={
             <RequireAuth>
-              <Template header={ListHeader} body={ListBody} />
+              <Template header={<ListHeader />} body={<ListBody />} />
             </RequireAuth>
           }
         />
@@ -64,11 +64,11 @@ function App() {
           path="/item/:id"
           element={
             <RequireAuth>
-              <Template header={ItemHeader} body={ItemBody} />
+              <Template header={<ItemHeader />} body={<ItemBody />} />
             </RequireAuth>
           }
         />
-        <Route path="/auth" element={<Template header={AuthPageHeader} body={AuthPageBody} />} />
+        <Route path="/auth" element={<Template header={<AuthPageHeader />} body={<AuthPageBody />} />} />
       </Routes>
     </Router>
   );
