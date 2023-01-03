@@ -1,22 +1,24 @@
 import { Dropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { selectMe, selectAuthLoading, doLogout } from "./authSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { selectMe, selectAuthLoading, doLogout, setFrom } from "./authSlice";
 import userIcon from "./user.svg"
 
 export function RequireAuth({ children }) {
   const me = useSelector(selectMe);
   const loading = useSelector(selectAuthLoading);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   if (loading) {
     return "Loading..."
   }
 
   if (!me) {
-    const authParams = new URLSearchParams();
-    authParams.set("from", location.pathname);
-    return <Navigate to={"/auth?" + authParams.toString()} replace />
+    dispatch(setFrom(location.pathname));
+    navigate("/auth");
+    return null;
   }
 
   return children; 

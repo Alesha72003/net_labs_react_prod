@@ -4,7 +4,8 @@ import { login, logout, whoami } from "./authAPI";
 const initialState = {
   me: null,
   loading: false,
-  error: null
+  error: null,
+  from: "/",
 };
 
 export const doLogin = createAsyncThunk(
@@ -25,7 +26,11 @@ export const doWhoami = createAsyncThunk(
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setFrom: (state, action) => {
+      state.from = action.payload;
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(doLogin.pending, state => {
@@ -66,4 +71,6 @@ export const authSlice = createSlice({
 export const selectAuthLoading = (state) => state.auth.loading;
 export const selectMe = (state) => state.auth.me;
 export const selectError = (state) => state.auth.error;
+export const selectFrom = (state) => state.auth.from;
+export const { setFrom } = authSlice.actions;
 export default authSlice.reducer;
