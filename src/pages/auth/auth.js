@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { selectAuthLoading, selectError, doLogin, selectMe} from '../../features/auth/authSlice';
+import { selectAuthLoading, selectError, doLogin, selectMe, selectFrom} from '../../features/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Alert } from 'react-bootstrap';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export function AuthPageHeader() {
     return null;
@@ -13,8 +13,7 @@ export function AuthPageBody() {
     const loading = useSelector(selectAuthLoading);
     const me = useSelector(selectMe);
     const error = useSelector(selectError);
-    const location = useLocation();
-    const from = new URLSearchParams(location.search).get("from") || "/";
+    const from = useSelector(selectFrom);
     const dispatch = useDispatch();
 
     function handlerSubmit(e) {
