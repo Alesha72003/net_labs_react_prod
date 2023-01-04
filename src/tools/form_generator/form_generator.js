@@ -24,7 +24,7 @@ export function Checkbox(config) {
   );
 }
 
-export function CustomForm({children, onSubmitData}) {
+export function CustomForm({children, onSubmitData, className}) {
 
   function onSubmitHandle(e) {
     e.preventDefault();
@@ -35,7 +35,7 @@ export function CustomForm({children, onSubmitData}) {
   }
 
   return (
-    <Form onSubmit={onSubmitHandle}>
+    <Form onSubmit={onSubmitHandle} className={className}>
       {children}
     </Form>
   )
