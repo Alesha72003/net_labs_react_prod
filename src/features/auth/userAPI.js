@@ -42,3 +42,7 @@ export function getUser(id) {
         groups: users[id].groups.map((el) => groups[el])
     }) : reject("Not found"), 500));
 }
+
+export function updateUser(user) {
+    return new Promise(resolve => setTimeout(() => resolve(), 500));
+}

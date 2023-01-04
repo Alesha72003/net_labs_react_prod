@@ -52,7 +52,7 @@ export const itemSlice = createSlice({
       .addCase(updateItem.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
+      });
   }
 });
 

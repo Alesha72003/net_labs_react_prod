@@ -11,8 +11,8 @@ export function CentralWindow({ children }) {
 
 export function ListTemplate({ children }) {
   return (
-    <ListGroup className="editlist">
-    {(Array.isArray(children) ? children : Array(children)).map((el, i) =>
+    <ListGroup className="listtemplate">
+    {(Array.isArray(children) ? children : Array(children)).filter(el => el).map((el, i) =>
       <ListGroup.Item key={i}>{el}</ListGroup.Item>
     )}
     </ListGroup>
