@@ -2,6 +2,11 @@
     width: 50%;
     /* max-width: 90vh; */
     max-height: 75%;
+    display: flex;
+    flex-direction: column;
+}
+.centralwindow > * {
+    flex: 1;
 }
 
 .listtemplate > .list-group-item > .formgroup {

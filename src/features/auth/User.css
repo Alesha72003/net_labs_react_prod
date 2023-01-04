@@ -1,3 +1,29 @@
+.userform > .listtemplate {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+  
+.userform > .listtemplate > .list-group-item:nth-child(3) {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.userform > .listtemplate > .list-group-item:nth-child(3) > * {
+  width: 100%;
+}
+
+.userform > .listtemplate > .list-group-item:nth-child(3) .listtemplate {
+  overflow: auto;
+}
+
 #listgroups {
-    display: block;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#listgroups > * {
+  width: 100%;
 }

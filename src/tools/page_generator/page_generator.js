@@ -9,11 +9,11 @@ export function CentralWindow({ children }) {
   );
 }
 
-export function ListTemplate({ children }) {
+export function ListTemplate({ children, action }) {
   return (
     <ListGroup className="listtemplate">
     {(Array.isArray(children) ? children : Array(children)).filter(el => el).map((el, i) =>
-      <ListGroup.Item key={i}>{el}</ListGroup.Item>
+      <ListGroup.Item key={i} action={action}>{el}</ListGroup.Item>
     )}
     </ListGroup>
   );
