@@ -10,6 +10,7 @@ import { AuthHeader, RequireAuth } from "./features/auth/Auth";
 import { doWhoami } from "./features/auth/authSlice";
 import { ItemHeader, ItemBody } from "./pages/item/Item";
 import logo from './logo.svg';
+import { UserBody, UserHeader } from './pages/user/User';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -66,6 +67,12 @@ function App() {
             <RequireAuth>
               <Template header={<ItemHeader />} body={<ItemBody />} />
             </RequireAuth>
+          }
+        />
+        <Route
+          path="/testuser"
+          element={
+            <Template header={<UserHeader />} body={<UserBody />} />
           }
         />
         <Route path="/auth" element={<Template header={<AuthPageHeader />} body={<AuthPageBody />} />} />

@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Dropdown, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from "react-router-dom";
-import { selectMe, selectAuthLoading, doLogout, setFrom } from "./authSlice";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { selectMe, selectAuthLoading, doLogout, setFrom, doLogin, selectFrom } from "./authSlice";
+import { CustomForm, Group } from '../../tools/form_generator/form_generator';
 import userIcon from "./user.svg"
 
 export function RequireAuth({ children }) {
@@ -71,5 +72,27 @@ export function AuthHeader() {
         </Dropdown.Item>
       </Dropdown.Menu> : null}
     </Dropdown>
+  );
+}
+
+export function Auth() {
+  const loading = useSelector(selectAuthLoading);
+  const me = useSelector(selectMe);
+  const from = useSelector(selectFrom);
+  const dispatch = useDispatch();
+
+  return (
+    <>
+      {me ? <Navigate to={from} /> : null}
+      <CustomForm onSubmitData={(data) => !loading ? dispatch(doLogin(data)) : null}>
+        <Group label="Login" name="login">
+          <Form.Control />
+        </Group>
+        <Group label="Password" name="password">
+          <Form.Control />
+        </Group>
+        <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
+      </CustomForm>
+    </>
   );
 }

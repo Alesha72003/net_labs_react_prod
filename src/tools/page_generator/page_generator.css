@@ -3,3 +3,13 @@
     /* max-width: 90vh; */
     max-height: 75%;
 }
+
+.listtemplate > .list-group-item > .formgroup {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+}
+
+.listtemplate > .list-group-item > .formgroup > .form-label {
+    width: 10%;
+}

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export function Group(config) {
   return (
-    <Form.Group controlId={config.name} name={config.name}>
+    <Form.Group className={"formgroup" + (config.className ? ` ${config.className}` : '')} controlId={config.name} name={config.name} id={config.id}>
       <Form.Label>{config.label}</Form.Label>
       {config.children}
     </Form.Group>
