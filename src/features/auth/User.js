@@ -1,7 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { CustomForm, Group } from "../../tools/form_generator/form_generator";
-import { CentralWindow, ListTemplate } from "../../tools/page_generator/page_generator";
+import { ListTemplate } from "../../tools/page_generator/page_generator";
 import "./User.css";
 import { selectUser, selectUserLoading } from "./userSlice";
 
@@ -23,16 +23,7 @@ export function User({disabled, canDelete})  {
         <Group label="Groups" id="listgroups">
           <ListTemplate action>
             <p>test</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
-            <p>test2</p>
+
           </ListTemplate>
         </Group>
         {!disabled ? <>

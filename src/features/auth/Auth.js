@@ -85,7 +85,7 @@ export function Auth() {
     <>
       {me ? <Navigate to={from} /> : null}
       <CustomForm onSubmitData={(data) => !loading ? dispatch(doLogin(data)) : null}>
-        <Group label="Login" name="login">
+        <Group label="Login" name="username">
           <Form.Control />
         </Group>
         <Group label="Password" name="password">

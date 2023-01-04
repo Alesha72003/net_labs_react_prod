@@ -1,3 +1,5 @@
+import API from "../../app/api";
+
 // export function login(data) {
 //   const xhr = new XMLHttpRequest();
 //   xhr.open("POST", "/api/login")
@@ -12,22 +14,26 @@
 //   });
 // }
 
-const me = {
-  id: 1,
-  username: "admin",
-  admin: true
-};
-
-export function login(data) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (data.login === "admin" && data.password === "admin") {
-        return resolve(me);
-      }
-      return reject("Login or password incorrect");
-    }, 500);
-  });
+export async function login(data) {
+  return (await API.post("/login", data)).data;
 }
+
+// const me = {
+//   id: 1,
+//   username: "admin",
+//   admin: true
+// };
+
+// export function login(data) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (data.login === "admin" && data.password === "admin") {
+//         return resolve(me);
+//       }
+//       return reject("Login or password incorrect");
+//     }, 500);
+//   });
+// }
 
 // export function logout() {
 //   const xhr = new XMLHttpRequest();
