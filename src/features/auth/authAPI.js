@@ -49,14 +49,22 @@ export async function login(data) {
 //   });
 // }
 
-export function logout() {
-  return new Promise((resolve) => setTimeout(() => resolve(), 500));
+// export function logout() {
+//   return new Promise((resolve) => setTimeout(() => resolve(), 500));
+// }
+
+export async function logout() {
+  return await API.get("/logout")
 }
 
-export function whoami() {
-  return new Promise((_, reject) => {
-    setTimeout(() => reject(), 500);
-  });
+// export function whoami() {
+//   return new Promise((_, reject) => {
+//     setTimeout(() => reject(), 500);
+//   });
+// }
+
+export async function whoami() {
+  return (await API.get('/user')).data;
 }
 
 // export function whoami() {
