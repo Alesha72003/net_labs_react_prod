@@ -3,7 +3,7 @@ import "./page_generator.css";
 
 export function CentralWindow({ children }) {
   return (
-    <div className="position-absolute top-50 start-50 translate-middle centralwindow">
+    <div className="top-50 start-50 translate-middle centralwindow">
       {children}
     </div>
   );

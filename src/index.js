@@ -5,32 +5,33 @@ import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import { store } from './app/store';
 import { ListBody, ListHeader} from './pages/list/list';
 import { AuthPageBody, AuthPageHeader } from './pages/auth/auth';
-import { Navbar, Container } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { AuthHeader, RequireAuth } from "./features/auth/Auth";
 import { doWhoami } from "./features/auth/authSlice";
 import { ItemHeader, ItemBody } from "./pages/item/Item";
 import logo from './logo.svg';
 import { UserBody, UserHeader } from './pages/user/User';
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function TemplateHeader({header}) {
   return (
     <Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="#home">
-          <img
-            alt=""
-            src={logo}
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />{' '}
-          React Bootstrap
-        </Navbar.Brand>
+      <Navbar.Brand href="#home">
+        <img
+          alt=""
+          src={logo}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />{' '}
+        React Bootstrap
+      </Navbar.Brand>
+      <div id="pageheader">
         {header}
-        <AuthHeader />
-      </Container>
+      </div>
+      <AuthHeader />
     </Navbar>
   );
 }

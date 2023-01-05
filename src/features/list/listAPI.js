@@ -31,10 +31,23 @@ const tasks = {
     status: "test",
     image: "3.jpg"
   },
+  // 4: {
+  //   description: "noimage",
+  //   taskname: "noimage",
+  //   status: "test",
+  //   image: ""
+  // }
   4: {
-    description: "noimage",
-    taskname: "noimage",
-    status: "test"
+    description: "test",
+    taskname: "test",
+    status: "test",
+    image: "3.jpg"
+  },
+  5: {
+    description: "test",
+    taskname: "test",
+    status: "test",
+    image: "3.jpg"
   }
 };
 
