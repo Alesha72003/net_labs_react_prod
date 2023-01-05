@@ -9,12 +9,12 @@
     }
 }
 
-#header > .navbar {
+/* #header > .navbar {
     justify-content: space-between;
     align-items: center;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-}
+} */
 
 #header {
     position: sticky;
