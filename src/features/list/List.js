@@ -16,8 +16,9 @@ export default function List() {
         <Card>
           {item.image ? <Card.Img variant="top" src={`/img/${item.image}`} /> : null}
           <Card.Body>
-            <Card.Title>{item.title}</Card.Title>
+            <Card.Title>{item.taskname}</Card.Title>
             <Card.Text className="card-body-text">{item.description}</Card.Text>
+            <Card.Text><b>Status: </b>{item.status}</Card.Text>
             <Button variant="primary" onClick={() => navigate(`/item/${item.id}`)}>Перейти</Button>
           </Card.Body>
         </Card>

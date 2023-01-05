@@ -11,6 +11,7 @@
 
 .card {
     height: auto;
+    min-width: 15rem;
 }
 
 .card-body {
