@@ -1,6 +1,6 @@
 import { ListTemplate } from "../../tools/page_generator/page_generator";
-import { CustomForm, Group, Select } from "../../tools/form_generator/form_generator";
-import { Form, Button } from "react-bootstrap";
+import { CustomForm, Group, Select, Control } from "../../tools/form_generator/form_generator";
+import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, updateItem, selectItemLoading, selectItemValue, setPreloaded } from "./itemSlice";
 import { useParams } from "react-router-dom";
@@ -27,11 +27,11 @@ export function Item() {
     <CustomForm onSubmitData={data => !loading ? dispatch(updateItem({...value, ...data})) : null}>
       <ListTemplate>
         <Group name="taskname" label="Taskname">
-          <Form.Control defaultValue={value.taskname} />
+          <Control value={value.taskname} loading={!value.taskname} />
         </Group>
         <Group name="description" label="Description">
           {/* <Editor tinymceScriptSrc="/js/tinymce/tinymce.min.js" /> */}
-          <Form.Control defaultValue={value.description} />
+          <Control value={value.description} loading={!value.description} />
         </Group>
         <Group name="status" label="Status">
           <Select loading={!value.status} value={value.status}>
