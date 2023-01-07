@@ -14,43 +14,43 @@ import API from "../../app/api";
 //   });
 // }
 
-const tasks = {
-  1: {
-    description: "test",
-    taskname: "test",
-    status: "IN_WORK",
-    // image: "1.jpg"
-  },
-  2: {
-    description: "test",
-    taskname: "test",
-    status: "test",
-    // image: "2.jpeg"
-  },
-  3: {
-    description: "test",
-    taskname: "test",
-    status: "test",
-    // image: "3.jpg"
-  },
-  4: {
-    description: "noimage",
-    taskname: "noimage",
-    // status: "test",
-  },
-  // 4: {
-  //   description: "test",
-  //   taskname: "test",
-  //   status: "test",
-  //   image: "3.jpg"
-  // },
-  5: {
-    description: "test",
-    taskname: "test",
-    status: "test",
-    // image: "3.jpg"
-  }
-};
+// const tasks = {
+//   1: {
+//     description: "test",
+//     taskname: "test",
+//     status: "IN_WORK",
+//     // image: "1.jpg"
+//   },
+//   2: {
+//     description: "test",
+//     taskname: "test",
+//     status: "test",
+//     // image: "2.jpeg"
+//   },
+//   3: {
+//     description: "test",
+//     taskname: "test",
+//     status: "test",
+//     // image: "3.jpg"
+//   },
+//   4: {
+//     description: "noimage",
+//     taskname: "noimage",
+//     // status: "test",
+//   },
+//   // 4: {
+//   //   description: "test",
+//   //   taskname: "test",
+//   //   status: "test",
+//   //   image: "3.jpg"
+//   // },
+//   5: {
+//     description: "test",
+//     taskname: "test",
+//     status: "test",
+//     // image: "3.jpg"
+//   }
+// };
 
 // export function fetchData(where = {}) {
 //   console.log(where);
