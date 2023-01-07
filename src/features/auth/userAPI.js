@@ -12,37 +12,45 @@
 //   });
 // }
 
-const groups = {
-    1: {
-        id: 1,
-        name: "admin"
-    },
-    2: {
-        id: 2,
-        name: "test"
-    }
-};
+import API from "../../app/api";
 
-const users = {
-    1: {
-        id: 1,
-        username: "admin",
-        groups: [1, 2]
-    }, 
-    2: {
-        id: 2,
-        username: "scv",
-        groups: [2]
-    }
-};
+// const groups = {
+//     1: {
+//         id: 1,
+//         name: "admin"
+//     },
+//     2: {
+//         id: 2,
+//         name: "test"
+//     }
+// };
 
-export function getUser(id) {
-    return new Promise((resolve, reject) => setTimeout(() => users[id] ? resolve({
-        user: users[id],
-        groups: users[id].groups.map((el) => groups[el])
-    }) : reject("Not found"), 500));
+// const users = {
+//     1: {
+//         id: 1,
+//         username: "admin",
+//         groups: [1, 2]
+//     }, 
+//     2: {
+//         id: 2,
+//         username: "scv",
+//         groups: [2]
+//     }
+// };
+
+// export function getUser(id) {
+//     return new Promise((resolve, reject) => setTimeout(() => users[id] ? resolve({
+//         user: users[id],
+//         groups: users[id].groups.map((el) => groups[el])
+//     }) : reject("Not found"), 500));
+// }
+
+export async function getUser(id) {
+    return (await API.get(`/user/${id}`)).data;
 }
 
 export function updateUser(user) {
-    return new Promise(resolve => setTimeout(() => resolve(), 500));
+    let toSend = {...user};
+    delete toSend.id;
+    API.put(`/user/${user.id}`, toSend);
 }

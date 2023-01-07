@@ -56,29 +56,24 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <Template header={<ListHeader />} body={<ListBody />} />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/item/:id"
-          element={
-            <RequireAuth>
-              <Template header={<ItemHeader />} body={<ItemBody />} />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/testuser"
-          element={
+        <Route path="/" element={
+          <RequireAuth>
+            <Template header={<ListHeader />} body={<ListBody />} />
+          </RequireAuth>
+        }/>
+        <Route path="/item/:id" element={
+          <RequireAuth>
+            <Template header={<ItemHeader />} body={<ItemBody />} />
+          </RequireAuth>
+        }/>
+        <Route path="/user/:id" element={
+          <RequireAuth>
             <Template header={<UserHeader />} body={<UserBody />} />
-          }
-        />
-        <Route path="/auth" element={<Template header={<AuthPageHeader />} body={<AuthPageBody />} />} />
+          </RequireAuth>
+        }/>
+        <Route path="/auth" element={
+          <Template header={<AuthPageHeader />} body={<AuthPageBody />} />
+        }/>
       </Routes>
     </Router>
   );

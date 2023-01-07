@@ -33,6 +33,7 @@ export const itemSlice = createSlice({
       .addCase(getItem.pending, state => {
         state.loading = true;
         state.error = null;
+        // state.value = {};
       })
       .addCase(getItem.fulfilled, (state, action) => {
         state.loading = false;

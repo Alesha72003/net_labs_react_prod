@@ -1,5 +1,4 @@
 import API from "../../app/api"
-import { fetchData } from "../list/listAPI"
 
 // export async function fetchItem(id) {
 //     const res = await fetchData();
@@ -10,7 +9,8 @@ export async function fetchItem(id) {
     return (await API.get(`/task/${id}`)).data;
 }
 
-export function updateItemAPI(item) {
-    console.log("item", item);
-    return new Promise((resolve) => setTimeout(() => resolve(), 500));
+export async function updateItemAPI(item) {
+    let itemToSend = {...item};
+    delete itemToSend.id;
+    return await API.put(`/task/${item.id}`, itemToSend);
 }

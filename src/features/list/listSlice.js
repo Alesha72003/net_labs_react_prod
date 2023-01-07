@@ -26,11 +26,13 @@ export const listSlice = createSlice({
   name: "list",
   initialState,
   reducers: {
-    updateItem: (state, action) => {
+    updateListItem: (state, action) => {
       const item = action.payload;
       state.value = state.value.map(el => {
         if (el.id === item.id) {
-          return item;
+          return Object.keys(item)
+            .filter(e => e in el)
+            .reduce((a, e) => a = {[e]: item[e], ...a}, {});
         }
         return el;
       });
@@ -58,5 +60,6 @@ export const selectValue = (state) => state.list.value;
 export const selectStatus = (state) => state.list.status;
 export const selectLoading = (state) => state.list.status === "loading";
 export const selectListError = (state) => state.list.error;
+export const { updateListItem } = listSlice.actions;
 
 export default listSlice.reducer;

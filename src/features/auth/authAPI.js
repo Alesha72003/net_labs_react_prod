@@ -54,7 +54,7 @@ export async function login(data) {
 // }
 
 export async function logout() {
-  return await API.get("/logout")
+  await API.get("/logout");
 }
 
 // export function whoami() {
