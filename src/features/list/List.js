@@ -18,7 +18,7 @@ export default function List() {
           <Card.Body>
             <Card.Title>{item.taskname}</Card.Title>
             <Card.Text className="card-body-text">{item.description}</Card.Text>
-            <Card.Text><b>Status: </b>{item.status}</Card.Text>
+            {item.status ? <Card.Text><b>Status: </b>{item.status}</Card.Text> : null}
             <Button variant="primary" onClick={() => navigate(`/item/${item.id}`)}>Перейти</Button>
           </Card.Body>
         </Card>

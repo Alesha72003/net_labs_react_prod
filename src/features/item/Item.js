@@ -1,17 +1,18 @@
 import { ListTemplate } from "../../tools/page_generator/page_generator";
-import { CustomForm, Group, Select, Control } from "../../tools/form_generator/form_generator";
-import { Button } from "react-bootstrap";
+import { CustomForm, Group, Select, Control, TinyMCE } from "../../tools/form_generator/form_generator";
+import { Alert, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, updateItem, selectItemLoading, selectItemValue, setPreloaded } from "./itemSlice";
+import { getItem, updateItem, selectItemLoading, selectItemValue, setPreloaded, selectItemError } from "./itemSlice";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { selectValue } from "../list/listSlice";
-// import { Editor } from "@tinymce/tinymce-react";
+import "./Item.css";
 
 export function Item() {
   const value = useSelector(selectItemValue);
   const listValue = useSelector(selectValue)
   const loading = useSelector(selectItemLoading);
+  const error = useSelector(selectItemError);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -23,15 +24,29 @@ export function Item() {
     dispatch(setPreloaded(listValue.filter(elem => elem.id === id)[0]));
   }, [id, listValue, dispatch]);
 
-  return(!value ? "Loading..." :
-    <CustomForm onSubmitData={data => !loading ? dispatch(updateItem({...value, ...data})) : null}>
+  const refEditor = useRef();
+
+  return(
+    !value ? 
+      (error ? <Alert variant="danger">{error}</Alert> : "Loading...") 
+    :
+    <CustomForm 
+      onSubmitData={data => 
+        !loading ? 
+          dispatch(updateItem({
+            ...value, 
+            ...data,
+            description: refEditor.current.getContent()
+          })) 
+        : null
+      }
+    >
       <ListTemplate>
         <Group name="taskname" label="Taskname">
           <Control value={value.taskname} loading={!value.taskname} />
         </Group>
         <Group name="description" label="Description">
-          {/* <Editor tinymceScriptSrc="/js/tinymce/tinymce.min.js" /> */}
-          <Control value={value.description} loading={!value.description} />
+          <TinyMCE value={value.description} loading={!value.description} editorRef={refEditor} />
         </Group>
         <Group name="status" label="Status">
           <Select loading={!value.status} value={value.status}>

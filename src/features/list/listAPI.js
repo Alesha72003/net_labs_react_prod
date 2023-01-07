@@ -1,3 +1,5 @@
+import API from "../../app/api";
+
 // export function fetchData(where = {}) {
 //   const xhr = new XMLHttpRequest();
 //   xhr.open("GET", "/api/")
@@ -50,9 +52,15 @@ const tasks = {
   }
 };
 
-export function fetchData(where = {}) {
-  console.log(where);
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({data: tasks}), 500);
-  });
+// export function fetchData(where = {}) {
+//   console.log(where);
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve({data: tasks}), 500);
+//   });
+// }
+
+export async function fetchData(where = {}) {
+  return (await API.get('/', {
+    params: where
+  })).data;
 }

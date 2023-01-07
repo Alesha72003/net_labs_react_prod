@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 
 
 export function Group(config) {
@@ -64,4 +65,23 @@ export function CustomForm({children, onSubmitData, className}) {
     </Form>
   )
 
+}
+
+export function TinyMCE({loading, disabled, value, editorRef, ...props}) {
+  const ref = editorRef;
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.setValue(loading ? "<p>Loading...</p>" : value)
+    }
+  }, [loading, value, ref]);
+
+  return (
+    <Editor 
+      {...props} 
+      tinymceScriptSrc="/js/tinymce/tinymce.min.js" 
+      disabled={loading || disabled}
+      onInit={(evt, editor) => ref.current = editor}
+      initialValue={loading ? "<p>Loading...</p>" : value}
+    />
+  );
 }
