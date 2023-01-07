@@ -30,6 +30,7 @@ export const userSlice = createSlice({
             .addCase(doGetUser.pending, state => {
                 state.loading = true;
                 state.error = null;
+                state.value = {};
             })
             .addCase(doGetUser.fulfilled, (state, action) => {
                 state.value = action.payload;

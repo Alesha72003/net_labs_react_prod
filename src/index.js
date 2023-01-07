@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { store } from './app/store';
 import { ListBody, ListHeader} from './pages/list/list';
 import { AuthPageBody, AuthPageHeader } from './pages/auth/auth';
@@ -11,15 +11,19 @@ import { doWhoami } from "./features/auth/authSlice";
 import { ItemHeader, ItemBody } from "./pages/item/Item";
 import logo from './logo.svg';
 import { UserBody, UserHeader } from './pages/user/User';
+import { GroupHeader, GroupBody } from './pages/group/group';
 import "./index.css";
+import { GroupListHeader, GroupListBody } from './pages/groupList/groupList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function TemplateHeader({header}) {
+  const navigate = useNavigate();
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand onClick={() => navigate('/')} href="#">
           <img
             alt=""
             src={logo}
@@ -69,6 +73,16 @@ function App() {
         <Route path="/user/:id" element={
           <RequireAuth>
             <Template header={<UserHeader />} body={<UserBody />} />
+          </RequireAuth>
+        }/>
+        <Route path="/group/:id" element={
+          <RequireAuth>
+            <Template header={<GroupHeader />} body={<GroupBody />} />
+          </RequireAuth>
+        }/>
+        <Route path="/group" element={
+          <RequireAuth>
+            <Template header={<GroupListHeader />} body={<GroupListBody />} />
           </RequireAuth>
         }/>
         <Route path="/auth" element={

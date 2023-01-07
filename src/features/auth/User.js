@@ -6,7 +6,7 @@ import { CustomForm, Group } from "../../tools/form_generator/form_generator";
 import { ListTemplate } from "../../tools/page_generator/page_generator";
 import "./User.css";
 import { selectMe } from "./authSlice";
-import { doGetUser, doUpdateUser, selectUser, selectUserLoading, setUser } from "./userSlice";
+import { doGetUser, doUpdateUser, selectUser, selectUserError, selectUserLoading, setUser } from "./userSlice";
 
 export function User()  {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export function User()  {
   const value = useSelector(selectUser);
   const loading = useSelector(selectUserLoading);
   const me = useSelector(selectMe);
+  const error = useSelector(selectUserError);
 
   const { id } = useParams();
 
@@ -21,17 +22,17 @@ export function User()  {
     if (me.id === Number(id) && me.id !== value.id) {
       dispatch(setUser(me));
     }
-    else if (Number(id) !== value.id) {
+    else if (!loading && !error && Number(id) !== value.id) {
       dispatch(doGetUser(id));
     }
-  }, [dispatch, id, value, me]);
+  }, [dispatch, id, value, me, loading, error]);
 
   return (
-    value ? 
+    !error || value ? 
       <CustomForm className="userform" onSubmitData={data => !loading ? dispatch(doUpdateUser({id: value.id, ...data})) : null}>
         <ListTemplate>
           <Group label="Username" name="username">
-            <Form.Control disabled={!value.canUpdate} defaultValue={value.username} />
+            <Form.Control disabled={!value.canUpdate} value={value.username ? value.username : "Loading..."} />
           </Group>
           {value.canUpdate ? 
             <Group label="Password" name="password">
@@ -53,6 +54,6 @@ export function User()  {
           </> : null}
         </ListTemplate>
       </CustomForm>
-    : (loading ? "Loading..." : null)
+    : null
   );
 }
