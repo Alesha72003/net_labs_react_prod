@@ -59,13 +59,19 @@ export function AuthHeader() {
             Go to Admin panel
           </Dropdown.Item>
         : null}
+        <Dropdown.Item
+          onClick={() => {
+            navigate(`/user/${me.id}`);
+          }}
+        >
+          My profile
+        </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item
           onClick={() => {
             dispatch(doLogout()).then(() => {
               navigate("/auth");
             });
-
           }}
         >
           Logout

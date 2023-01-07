@@ -3,17 +3,13 @@ import { CustomForm, Group, Checkbox } from "../../tools/form_generator/form_gen
 import { useSelector, useDispatch } from 'react-redux';
 import "./Filter.css";
 import { selectLoading, getData } from "./listSlice";
-import { selectLoading as selectLoadingFilter, selectValue as selectValueFilter, getGroup } from "./filterSlice";
-import { useEffect } from "react";
+import { selectMe } from "../auth/authSlice";
 
 
 export default function Filter() {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
-  const loadingGroups = useSelector(selectLoadingFilter);
-  const valueGroups = useSelector(selectValueFilter);
-
-  useEffect(() => {dispatch(getGroup())}, [dispatch]) //Load groups on startup nado podumat`
+  const me = useSelector(selectMe);
 
 
   return (
@@ -22,14 +18,9 @@ export default function Filter() {
         <Form.Control placeholder="Type your query" />
       </Group>
       <Group name="group" label="Select Group">
-          <Form.Select
-            aria-label="Select group"
-            disabled={loadingGroups}
-            value={loadingGroups ? "Loading..." : undefined}
-          >
+          <Form.Select aria-label="Select group">
             <option key="all" value="">All groups</option>
-            {loadingGroups ? <option key="loading" disabled>Loading...</option> : null}
-            {valueGroups.map(el =>
+            {me.Groups.map(el =>
               <option key={el.id} value={el.id}>{el.name}</option>
             )}
           </Form.Select>
