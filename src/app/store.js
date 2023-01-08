@@ -5,6 +5,7 @@ import authReducer from "../features/auth/authSlice";
 import userReducer from "../features/auth/userSlice";
 import itemReducer from "../features/item/itemSlice";
 import groupReducer from "../features/auth/groupSlice";
+import chatReducer from "../features/chat/chatSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
     user: userReducer,
     item: itemReducer,
     group: groupReducer,
+    chat: chatReducer,
   },
 });

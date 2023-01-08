@@ -14,6 +14,7 @@ import { UserBody, UserHeader } from './pages/user/User';
 import { GroupHeader, GroupBody } from './pages/group/group';
 import "./index.css";
 import { GroupListHeader, GroupListBody } from './pages/groupList/groupList';
+import { ChatBody, ChatHeader } from './pages/chat/chat';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -87,6 +88,11 @@ function App() {
         }/>
         <Route path="/auth" element={
           <Template header={<AuthPageHeader />} body={<AuthPageBody />} />
+        }/>
+        <Route path="/chat/:id" element={
+          <RequireAuth>
+            <Template header={<ChatHeader />} body={<ChatBody />} />
+          </RequireAuth>
         }/>
       </Routes>
     </Router>

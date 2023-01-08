@@ -67,8 +67,9 @@ export function CustomForm({children, onSubmitData, className}) {
 
 }
 
-export function TinyMCE({loading, disabled, value, ...props}) {
-  const ref = useRef();
+export function TinyMCE({loading, disabled, value, refEditor, ...props}) {
+  const refCreate = useRef();
+  const ref = refEditor || refCreate;
   useEffect(() => {
     if (ref.current) {
       ref.current.setValue(loading ? "<p>Loading...</p>" : value)
