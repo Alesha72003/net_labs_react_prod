@@ -53,8 +53,7 @@ export function CustomForm({children, onSubmitData, className}) {
 
   function onSubmitHandle(e) {
     e.preventDefault();
-    const items = Object.keys(e.target.elements).map(el => e.target.elements[el].name || e.target.elements[el].id).filter(el => el)
-    console.log(e, items);
+    const items = Object.keys(e.target.elements).map(el => e.target.elements[el].name || e.target.elements[el].id).filter(el => el);
     const formData = items.reduce((a, v) => ({...a, [v]: e.target[v].type === "checkbox" ? e.target[v].checked : e.target[v].value}), {});
     return onSubmitData(formData);
   }

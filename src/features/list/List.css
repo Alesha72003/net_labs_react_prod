@@ -12,6 +12,8 @@
 .card {
     height: auto;
     min-width: 15rem;
+    width: 100%;
+    max-width: 30rem;
 }
 
 .card-body {
@@ -21,5 +23,5 @@
 
 .row {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(20rem, 1fr));
 }
