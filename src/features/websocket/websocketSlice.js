@@ -10,7 +10,7 @@ const initialState = {
 export const doConnect = createAsyncThunk(
   'websocket/connect',
   async (params, {dispatch}) => {
-    const websocket = connectWebSocket();
+    const websocket = await connectWebSocket();
     websocket.onmessage = (message) => {
       dispatch(message);
     }
