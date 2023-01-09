@@ -40,7 +40,7 @@ export function Chat() {
         <ListTemplate>
             <ListGroup>
                 {value.map((el) =>  
-                    <ListGroup.Item key={el.id}><p><b>From {el.User.username}: </b></p><div dangerouslySetInnerHTML={{__html: el.text}}></div></ListGroup.Item>
+                    <ListGroup.Item key={el.id}><p><b>from {el.User.username} {el.User.status ? "😐" : "💀"}: </b></p><div dangerouslySetInnerHTML={{__html: el.text}}></div></ListGroup.Item>
                 )}
             </ListGroup>
             <CustomForm onSubmitData={(data) => !loading ? onSubmitData(data) : null}>

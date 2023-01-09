@@ -20,7 +20,16 @@ export const doSendMessage = createAsyncThunk(
 export const chatSlice = createSlice({
     name: "chat",
     initialState,
-    reducers: {},
+    reducers: {
+        newMessage: (state, action) => {
+            state.value.push(action.payload)
+        },
+        userStatusUpdate: (state, action) => {
+            state.value = state.value.map(el => 
+              el.id === action.payload.id ? {...el, status: action.payload.status} : el
+            );
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(doGetMessages.pending, state => {
