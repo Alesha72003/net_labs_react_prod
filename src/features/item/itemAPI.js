@@ -1,10 +1,5 @@
 import API from "../../app/api"
 
-// export async function fetchItem(id) {
-//     const res = await fetchData();
-//     return res[id];
-// }
-
 export async function fetchItem(id) {
     return (await API.get(`/task/${id}`)).data;
 }

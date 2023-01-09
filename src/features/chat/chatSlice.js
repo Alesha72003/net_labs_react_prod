@@ -34,7 +34,7 @@ export const chatSlice = createSlice({
             })
             .addCase(doGetMessages.rejected, (state, action) => {
                 state.loading = false;
-                state.value = {};
+                state.value = [];
                 state.error = action.error.message;
             })
             .addCase(doSendMessage.pending, state => {

@@ -23,7 +23,8 @@ export function Chat() {
         dispatch(doSendMessage({
             ...data,
             to: id,
-            from: me,
+            from: me.id,
+            User: me,
             id: `me-${counter}`
         })).then(() => {
             if (ref.current) {
@@ -39,7 +40,7 @@ export function Chat() {
         <ListTemplate>
             <ListGroup>
                 {value.map((el) =>  
-                    <ListGroup.Item key={el.id}><p><b>From {el.from.username}: </b></p><div dangerouslySetInnerHTML={{__html: el.text}}></div></ListGroup.Item>
+                    <ListGroup.Item key={el.id}><p><b>From {el.User.username}: </b></p><div dangerouslySetInnerHTML={{__html: el.text}}></div></ListGroup.Item>
                 )}
             </ListGroup>
             <CustomForm onSubmitData={(data) => !loading ? onSubmitData(data) : null}>

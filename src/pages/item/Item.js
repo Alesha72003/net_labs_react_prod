@@ -2,6 +2,7 @@ import { Breadcrumb } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { Item } from "../../features/item/Item";
 import { CentralWindow } from "../../tools/page_generator/page_generator";
+import { Chat } from "../../features/chat/Chat";
 
 export function ItemHeader() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ export function ItemBody() {
   return (
     <CentralWindow>
       <Item />
+      <Chat />
     </CentralWindow>
+    
   );
 }

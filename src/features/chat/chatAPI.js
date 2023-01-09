@@ -1,3 +1,6 @@
+import { chatAPI } from "../../app/api"
+
+
 const messages_probka = [
     {
         id: 1,
@@ -25,10 +28,11 @@ const messages_probka = [
     }
 ];
 
-export function getMessages(id) {
-    return new Promise((resolve) => setTimeout(() => resolve(messages_probka), 500));
+export async function getMessages(id) {
+    return (await chatAPI.get(`/chat/${id}`)).data;
 }
 
-export function sendMessage(message) {
-    return new Promise(resolve => setTimeout(() => resolve(), 500));
+export async function sendMessage(message) {
+    let messageToSend = {text: message.text};
+    return (await chatAPI.post(`/chat/${message.to}`, messageToSend)).data;
 }
