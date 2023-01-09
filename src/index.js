@@ -15,6 +15,7 @@ import { GroupHeader, GroupBody } from './pages/group/group';
 import "./index.css";
 import { GroupListHeader, GroupListBody } from './pages/groupList/groupList';
 import { ChatBody, ChatHeader } from './pages/chat/chat';
+import { doConnect } from './features/websocket/websocketSlice';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -100,6 +101,7 @@ function App() {
 }
 
 store.dispatch(doWhoami())
+store.dispatch(doConnect());
 
 root.render(
   <React.StrictMode>

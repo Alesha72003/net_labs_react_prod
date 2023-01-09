@@ -6,6 +6,7 @@ import userReducer from "../features/auth/userSlice";
 import itemReducer from "../features/item/itemSlice";
 import groupReducer from "../features/auth/groupSlice";
 import chatReducer from "../features/chat/chatSlice";
+import websocketReducer from '../features/websocket/websocketSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,5 +16,6 @@ export const store = configureStore({
     item: itemReducer,
     group: groupReducer,
     chat: chatReducer,
+    websocket: websocketReducer,
   },
 });
