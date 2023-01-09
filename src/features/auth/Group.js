@@ -7,6 +7,7 @@ import { ListTemplate } from "../../tools/page_generator/page_generator";
 import { selectMe } from "./authSlice";
 import { doGetGroup, selectGroupLoading, selectGroupValue } from "./groupSlice";
 import userIcon from "./user.svg";
+import "./Group.css";
 
 export function GroupModule() {
   const navigate = useNavigate();
@@ -20,29 +21,31 @@ export function GroupModule() {
   }, [dispatch, id]);
 
   return (
-    <ListTemplate>
-      <Group label="Name">
-        <Control disabled value={!loading ? value.name : "Loading..."}/>
-      </Group>
-      <Group label="Members">
-        <ListGroup>
-          {!loading && value.Users ? value.Users.map(el =>
-            <ListGroup.Item key={el.id} onClick={() => navigate(`/user/${el.id}`)} action>
-              <img
-                alt=""
-                src={userIcon}
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
-              />{' '}
-              {el.username}
-            </ListGroup.Item>
-          ) :
-            <ListGroup.Item key="loading" disabled>Loading...</ListGroup.Item>
-          }
-        </ListGroup>
-      </Group>
-    </ListTemplate>
+    <div className="group-list">
+      <ListTemplate>
+        <Group label="Name">
+          <Control disabled value={!loading ? value.name : "Loading..."}/>
+        </Group>
+        <Group className="list-users" label="Members">
+          <ListGroup>
+            {!loading && value.Users ? value.Users.map(el =>
+              <ListGroup.Item key={el.id} onClick={() => navigate(`/user/${el.id}`)} action>
+                <img
+                  alt=""
+                  src={userIcon}
+                  width="30"
+                  height="30"
+                  className="d-inline-block align-top"
+                />{' '}
+                {el.username}
+              </ListGroup.Item>
+            ) :
+              <ListGroup.Item key="loading" disabled>Loading...</ListGroup.Item>
+            }
+          </ListGroup>
+        </Group>
+      </ListTemplate>
+    </div>
   );
 }
 
@@ -51,7 +54,7 @@ export function GroupList() {
   const navigate = useNavigate();
 
   return (
-    <ListGroup>
+    <ListGroup className="grouplist">
       {me.Groups.map(el => 
         <ListGroupItem key={el.id} onClick={() => navigate(`/group/${el.id}`)} action>
           {el.name}

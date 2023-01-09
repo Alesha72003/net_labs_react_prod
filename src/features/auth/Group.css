@@ -1,0 +1,33 @@
+.group-list,
+.group-list > .listtemplate,
+.group-list > .listtemplate > .list-group-item:nth-child(2)
+{
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.group-list > .listtemplate > .list-group-item:nth-child(2) > * 
+{
+  width: 100%;
+}
+
+.list-users > .list-group 
+{
+  overflow: auto;
+}
+
+.list-users {
+  /* max-height: 44rem; */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.list-users > * {
+  width: 100%;
+}
+
+.grouplist {
+  overflow: auto;
+}
