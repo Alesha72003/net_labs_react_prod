@@ -1,5 +1,6 @@
-import { getMessages, sendMessage } from "./chatAPI";
+import { getMessages, sendMessage, deleteMessage } from "./chatAPI";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useParams } from "react-router-dom";
 
 const initialState = {
     loading: false,
@@ -17,17 +18,27 @@ export const doSendMessage = createAsyncThunk(
     sendMessage
 );
 
+export const doDeleteMessage = createAsyncThunk(
+    'chat/deleteMessage',
+    deleteMessage
+);
+
 export const chatSlice = createSlice({
     name: "chat",
     initialState,
     reducers: {
         newMessage: (state, action) => {
             state.value.push(action.payload)
+            // как задать pageID?
+            //action.payload.to === pageId ? state.value.push(action.payload) : 1
         },
         userStatusUpdate: (state, action) => {
             state.value = state.value.map(el => 
-              el.id === action.payload.id ? {...el, status: action.payload.status} : el
+              el.from === action.payload.id ? {...el, status: action.payload.status} : el
             );
+        },
+        msgDeleted: (state, action) => {
+            delete(state.value[action.payload.id])
         }
     },
     extraReducers: builder => {

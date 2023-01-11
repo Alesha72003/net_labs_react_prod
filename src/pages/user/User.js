@@ -1,6 +1,7 @@
 import { Breadcrumb } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { User } from "../../features/auth/User";
+import { Chat } from "../../features/chat/Chat";
 import { CentralWindow } from "../../tools/page_generator/page_generator";
 import "./User.css"
 
@@ -19,6 +20,8 @@ export function UserBody() {
   return (
     <CentralWindow>
       <User />
+      <Chat />
     </CentralWindow>
+    
   );
 }

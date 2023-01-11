@@ -12,7 +12,7 @@ export const doConnect = createAsyncThunk(
   async (params, {dispatch}) => {
     const websocket = await connectWebSocket();
     websocket.onmessage = (message) => {
-      dispatch(message);
+      dispatch(JSON.parse(message.data));
     }
   }
 );
