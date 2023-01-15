@@ -1,6 +1,5 @@
 import { Breadcrumb } from "react-bootstrap";
 import { GroupList } from "../../features/auth/Group";
-import { Chat } from "../../features/chat/Chat";
 import { CentralWindow } from "../../tools/page_generator/page_generator";
 
 export function GroupListHeader() {
