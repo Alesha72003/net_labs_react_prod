@@ -15,7 +15,13 @@ export const doGetGroup = createAsyncThunk(
 export const groupSlice = createSlice({
   name: "group",
   initialState,
-  reducers: {},
+  reducers: {
+    userStatusUpdate: (state, action) => {
+      state.value.Users = state.value.Users.map(el => 
+        el.id === action.payload.id ? {...el, status: action.payload.status} : el
+      );
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(doGetGroup.pending, state => {

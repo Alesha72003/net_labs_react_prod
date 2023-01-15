@@ -6,6 +6,7 @@ import { CustomForm, TinyMCE } from "../../tools/form_generator/form_generator";
 import { ListTemplate } from "../../tools/page_generator/page_generator";
 import { selectMe } from "../auth/authSlice";
 import { doGetMessages, doSendMessage, doDeleteMessage, selectChatLoading, selectChatValue } from "./chatSlice";
+import "./Chat.css"
 
 export function Chat() {
     const value = useSelector(selectChatValue);
@@ -44,7 +45,7 @@ export function Chat() {
         <ListTemplate>
             <ListGroup>
                 {value.map((el) =>  
-                    <ListGroup.Item key={el.id}><p><b>from {el.User.username} {el.status || el.from === me.id? "😐" : "💀"}: </b></p><div dangerouslySetInnerHTML={{__html: el.text}}></div><Button disabled={loading} onClick={() => onDeleteMessage(el)}>{loading ? "🐴" : "🗑️"}</Button></ListGroup.Item>
+                    <ListGroup.Item key={el.id} className={el.deleted ? "msg-deleted" : undefined}><p><b>from {el.User.username} {el.status || el.from === me.id? "😐" : "💀"}: </b></p><div dangerouslySetInnerHTML={{__html: el.text}}></div><Button disabled={loading} onClick={() => onDeleteMessage(el)}>{loading ? "🐴" : "🗑️"}</Button></ListGroup.Item>
                 )}
             </ListGroup>
             <CustomForm onSubmitData={(data) => !loading ? onSubmitData(data) : null}>

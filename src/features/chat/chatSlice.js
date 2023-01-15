@@ -63,12 +63,15 @@ export const chatSlice = createSlice({
             })
             .addCase(doSendMessage.fulfilled, (state, action) => {
                 state.loading = false;
-                state.value.push(action.meta.arg);
+                state.value.push(action.payload);
             })
             .addCase(doSendMessage.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-            });
+            })
+            .addCase(doDeleteMessage.fulfilled, (state, action) => {
+                state.value = state.value.map(el => el.id === action.meta.arg.id ? {...el, deleted: true} : el );
+            })
     }
 });
 
