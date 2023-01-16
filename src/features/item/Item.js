@@ -21,8 +21,10 @@ export function Item() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(setPreloaded(listValue.filter(elem => elem.id === Number(id))[0]));
-  }, [id, listValue, dispatch]);
+    if (value.id != id) {
+      dispatch(setPreloaded(listValue.filter(elem => elem.id === Number(id))[0]));
+    }
+  }, [id, listValue, value, dispatch]);
 
   function onSubmit(data) {
     dispatch(updateItem(data)).then(() => {

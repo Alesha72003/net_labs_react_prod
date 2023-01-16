@@ -7,5 +7,5 @@ export async function fetchItem(id) {
 export async function updateItemAPI(item) {
     let itemToSend = {...item};
     delete itemToSend.id;
-    return await API.put(`/task/${item.id}`, itemToSend);
+    await API.put(`/task/${item.id}`, itemToSend);
 }

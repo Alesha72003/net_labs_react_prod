@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {fetchData} from "./listAPI";
+import {doSubscribe, fetchData} from "./listAPI";
 
 const initialState = {
   value: [],
@@ -20,6 +20,11 @@ const initialState = {
 export const getData = createAsyncThunk(
   'list/fetchData',
   fetchData
+);
+
+export const subscribe = createAsyncThunk(
+  'list/subscribe',
+  doSubscribe
 );
 
 export const listSlice = createSlice({

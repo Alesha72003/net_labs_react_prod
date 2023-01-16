@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-
+import "./form_generator.css";
 
 export function Group(config) {
   return (
@@ -71,7 +71,9 @@ export function TinyMCE({loading, disabled, value, refEditor, ...props}) {
   const ref = refEditor || refCreate;
   useEffect(() => {
     if (ref.current) {
-      ref.current.setValue(loading ? "<p>Loading...</p>" : value)
+      if (loading || value) {
+        (ref.current.setValue || ref.current.setContent)(loading ? "<p>Loading...</p>" : value)
+      }
     }
   }, [loading, value, ref]);
 

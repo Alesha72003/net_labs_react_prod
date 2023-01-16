@@ -64,3 +64,7 @@ export async function fetchData(where = {}) {
     params: where
   })).data;
 }
+
+export async function doSubscribe(id) {
+  await API.post(`/task/${id}/subscribe`);
+}

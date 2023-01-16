@@ -100,8 +100,8 @@ function App() {
   );
 }
 
-store.dispatch(doWhoami())
 store.dispatch(doConnect());
+store.dispatch(doWhoami())
 
 root.render(
   <React.StrictMode>
