@@ -6,5 +6,8 @@ export function connectWebSocket() {
         ws.onopen = () => {
             resolve(ws);
         };
+        ws.onclose = () => {
+            console.log("Websocket closed");
+        }
     });
 }
