@@ -6,7 +6,6 @@ import { getItem, updateItem, selectItemLoading, selectItemValue, setPreloaded, 
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { selectValue, updateListItem } from "../list/listSlice";
-import "./Item.css";
 
 export function Item() {
   const value = useSelector(selectItemValue);
