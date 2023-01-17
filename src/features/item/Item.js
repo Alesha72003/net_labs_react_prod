@@ -21,7 +21,7 @@ export function Item() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (value.id != id) {
+    if (!value || value.id != id) {
       dispatch(setPreloaded(listValue.filter(elem => elem.id === Number(id))[0]));
     }
   }, [id, listValue, value, dispatch]);
