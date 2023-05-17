@@ -61,6 +61,13 @@ export function AuthHeader() {
         : null}
         <Dropdown.Item
           onClick={() => {
+            navigate("/chat");
+          }}
+        >
+          Chats
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
             navigate(`/user/${me.id}`);
           }}
         >

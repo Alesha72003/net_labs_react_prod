@@ -16,6 +16,7 @@ import "./index.css";
 import { GroupListHeader, GroupListBody } from './pages/groupList/groupList';
 import { ChatBody, ChatHeader } from './pages/chat/chat';
 import { doConnect } from './features/websocket/websocketSlice';
+import { ChatListBody, ChatListHeader } from './pages/chatList/chatList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -85,6 +86,11 @@ function App() {
         <Route path="/group" element={
           <RequireAuth>
             <Template header={<GroupListHeader />} body={<GroupListBody />} />
+          </RequireAuth>
+        }/>
+        <Route path="/chat" element={
+          <RequireAuth>
+            <Template header={<ChatListHeader />} body={<ChatListBody />} />
           </RequireAuth>
         }/>
         <Route path="/auth" element={
